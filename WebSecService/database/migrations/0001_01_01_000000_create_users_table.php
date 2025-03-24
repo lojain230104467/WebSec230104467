@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -19,6 +20,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            
+            // Added fields
+            $table->decimal('credit', 10, 2)->default(0.00); // User's account balance
+            $table->foreignId('role_id')->constrained('roles')->onDelete('cascade'); // Role assignment
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -35,6 +40,17 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        // Insert a default Admin user
+        DB::table('users')->insert([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('admin123'), // Hashed password
+            'credit' => 0.00,
+            'role_id' => 1, // Assuming Admin role has ID 1
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**
