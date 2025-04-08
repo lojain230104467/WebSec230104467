@@ -14,7 +14,7 @@ $(document).ready(function(){
 </script>
 <div class="d-flex justify-content-center">
     <div class="row m-4 col-sm-8">
-        <form action="{{route('users_save', $user->id)}}" method="post">
+        <form action="{{route('profile.save', $user->id)}}" method="post">
             {{ csrf_field() }}
             @foreach($errors->all() as $error)
             <div class="alert alert-danger">
@@ -43,7 +43,7 @@ $(document).ready(function(){
                 <select multiple class="form-select" id='permissions' name="permissions[]">
                 @foreach($permissions as $permission)
                     <option value='{{$permission->name}}' {{$permission->taken?'selected':''}}>
-                        {{$permission->display_name}}
+                        {{$permission->name}}
                     </option>
                     @endforeach
                 </select>

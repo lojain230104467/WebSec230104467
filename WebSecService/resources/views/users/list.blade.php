@@ -44,13 +44,13 @@
         </td>
         <td scope="col">
           @can('edit_users')
-          <a class="btn btn-primary" href='{{route('users_edit', [$user->id])}}'>Edit</a>
+          <a class="btn btn-primary" href='{{route('profile.edit', [$user->id])}}'>Edit</a>
           @endcan
           @can('admin_users')
-          <a class="btn btn-primary" href='{{route('edit_password', [$user->id])}}'>Change Password</a>
+          <a class="btn btn-primary" href='{{route('profile.edit_password', [$user->id])}}'>Change Password</a>
           @endcan
           @can('delete_users')
-          <a class="btn btn-danger" href='{{route('users_delete', [$user->id])}}'>Delete</a>
+          <a class="btn btn-danger" href='{{route('users.delete', [$user->id])}}'>Delete</a>
           @endcan
         </td>
       </tr>

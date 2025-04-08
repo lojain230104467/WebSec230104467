@@ -22,7 +22,7 @@
                 <th>Permissions</th>
                 <td>
                     @foreach($permissions as $permission)
-                        <span class="badge bg-success">{{$permission->display_name}}</span>
+                        <span class="badge bg-success">{{$permission->name}}</span>
                     @endforeach
                 </td>
             </tr>
@@ -33,7 +33,7 @@
             </div>
             @if(auth()->user()->hasPermissionTo('admin_users')||auth()->id()==$user->id)
             <div class="col col-4">
-                <a class="btn btn-primary" href='{{route('edit_password', $user->id)}}'>Change Password</a>
+                <a class="btn btn-primary" href='{{route('profile.edit_password', $user->id)}}'>Change Password</a>
             </div>
             @else
             <div class="col col-4">
@@ -41,7 +41,7 @@
             @endif
             @if(auth()->user()->hasPermissionTo('edit_users')||auth()->id()==$user->id)
             <div class="col col-2">
-                <a href="{{route('users_edit', $user->id)}}" class="btn btn-success form-control">Edit</a>
+                <a href="{{route('profile.edit', $user->id)}}" class="btn btn-success form-control">Edit</a>
             </div>
             @endif
         </div>
