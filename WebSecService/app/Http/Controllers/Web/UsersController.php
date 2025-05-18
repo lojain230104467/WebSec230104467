@@ -40,9 +40,9 @@ class UsersController extends Controller {
 
     	try {
     		$this->validate($request, [
-	        'name' => ['required', 'string', 'min:5'],
-	        'email' => ['required', 'email', 'unique:users'],
-	        'password' => ['required', 'confirmed', Password::min(8)->numbers()->letters()->mixedCase()->symbols()],
+	        'name' => ['required', 'string'],//, 'min:5'
+	        'email' => ['required', 'email'],//, 'unique:users']
+	        'password' => ['required'],// 'confirmed', Password::min(8)->numbers()->letters()->mixedCase()->symbols()
 	    	]);
     	}
     	catch(\Exception $e) {
@@ -77,8 +77,8 @@ class UsersController extends Controller {
         $user = User::where('email', $request->email)->first();
         Auth::setUser($user);
 
-        if(!$user->email_verified_at)
-            return redirect()->back()->withInput($request->input())->withErrors('Your email is not verified.');
+        // if(!$user->email_verified_at)
+        //     return redirect()->back()->withInput($request->input())->withErrors('Your email is not verified.');
 
 
         return redirect('/');
